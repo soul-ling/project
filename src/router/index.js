@@ -5,25 +5,25 @@ import Login from "../pages/Login"
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
-    path: "/",
-    name: "login",
-    component: Login
-  },
-  {
-    path: "/home",
-    name: "home",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../pages/Home")
-  }
+const routes = [{
+        path: "/login",
+        name: "login",
+        component: () =>
+            import ( /* webpackChunkName: "about" */ "../pages/Login")
+    },
+    {
+        path: "/home",
+        name: "home",
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () =>
+            import ( /* webpackChunkName: "about" */ "../pages/Home")
+    }
 ];
 
 const router = new VueRouter({
-  routes
+    routes
 });
 
 export default router;

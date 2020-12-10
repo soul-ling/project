@@ -2,6 +2,44 @@ el-carousel {
     width: 300px;
 }
 
-.login .el-input__inner {
+.container .el-input__inner {
     width: 83%!important;
+    background-color: rgba(4, 9, 71, 0.2);
+    border-color: white;
+    border-radius: 5px;
+    color: yellow;
 }
+
+.el-form-item__label {
+    color: white!important;
+    font-weight: bold!important;
+}
+
+.el-button.el-button--primary {
+    width: 250px;
+    background: linear-gradient(90deg, #1596fb, #002dff)!important;
+}
+
+.el-button span {
+    color: white;
+}
+
+.el-header {
+    padding: 0!important;
+}
+
+
+/* 
+aside {
+    width: 160px!important;
+}
+
+.el-menu {
+    width: 160px!important;
+    padding: 0;
+}
+
+.el-submenu {
+    width: 160px!important;
+    padding: 0;
+} */

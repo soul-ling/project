@@ -14,8 +14,25 @@ import 'element-ui/lib/theme-chalk/index.css';
 // Vue.use(CarouselItem)
 
 Vue.use(ElementUI);
+//路由前置钩子，路由守卫
+router.beforeEach((to, from, next) => {
+
+    // console.log(from);
+    //用户登陆之后，localstorage中有token
+    let token = localStorage.getItem('hello')
+        // console.log(to);
+    if (token) {
+        next()
+    } else {
+        if (to.path == "/login") {
+            next()
+        } else {
+            next({ path: "/login" })
+        }
+    }
+})
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount("#app");

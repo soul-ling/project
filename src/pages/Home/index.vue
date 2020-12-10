@@ -36,14 +36,10 @@
             <i class="el-icon-menu"></i>
             <span slot="title">导航二</span>
           </el-menu-item>
-          <el-menu-item index="3" disabled>
+          <!-- <el-menu-item index="3" disabled>
             <i class="el-icon-document"></i>
             <span slot="title">导航三</span>
-          </el-menu-item>
-          <el-menu-item index="4">
-            <i class="el-icon-setting"></i>
-            <span slot="title">导航四</span>
-          </el-menu-item>
+          </el-menu-item>-->
         </el-menu>
       </el-aside>
       <el-container>
@@ -51,13 +47,16 @@
         <el-header>
           <el-row type="flex" class="row-bg" justify="space-between">
             <el-col :span="6">
-              <div class="grid-content bg-purple"></div>
+              <div class="grid-content bg-purple">图标</div>
             </el-col>
             <el-col :span="6">
-              <div class="grid-content bg-purple-light">hello World</div>
+              <div class="grid-content bg-purple-light">后台管理</div>
             </el-col>
             <el-col :span="6">
-              <div class="grid-content bg-purple">登录</div>
+              <el-avatar shape="circle" :size="35" fit="fit" :src="url"></el-avatar>
+              <span class="grid-content bg-purple">欢迎您，</span>
+              <span class="nickname">{{userInfo.nickname}}</span>
+              <span class="quit" @click="quit">退出</span>
             </el-col>
           </el-row>
         </el-header>
@@ -68,11 +67,18 @@
   </div>
 </template>
 <script>
+import { getloginlog } from "../../api/index.js";
+import {mapState} from "vuex";
+// import router from "../../router"
 export default {
   data() {
     return {
-      isCollapse: true
+      isCollapse: true,
+      url:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607601016706&di=ece22e55d9542715e594c78ed0162f0f&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn19%2F0%2Fw400h400%2F20180910%2F3391-hiycyfw5413589.jpg"
     };
+  },
+  computed: {
+    ...mapState(['userInfo'])
   },
   methods: {
     handleOpen(key, keyPath) {
@@ -80,24 +86,35 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
+    },
+    quit(){
+      localStorage.removeItem('hello')
+      localStorage.removeItem('hello-userInfo')
+      this.$router.push('/login')
     }
+  },
+  mounted() {
+    console.log(getloginlog);
+    getloginlog().then(res => {
+      console.log(res);
+    });
   }
 };
 </script>
-<style>
+<style lang="scss">
 .el-header,
 .el-footer {
-  background-color: #b3c0d1;
-  color: #333;
   text-align: center;
   line-height: 60px;
 }
 
 .el-aside {
-  background-color: #d3dce6;
+  // background-color: #ccce62;
   color: #333;
   text-align: center;
-  line-height: 200px;
+  line-height: 50px;
+  margin-top: 15px;
+  //  width: 160px;
 }
 
 .el-main {
@@ -131,7 +148,7 @@ body > .el-container {
   background: #99a9bf;
 }
 .bg-purple {
-  background: #d3dce6;
+  background: #ccce62;
 }
 .bg-purple-light {
   background: #e5e9f2;
@@ -139,13 +156,23 @@ body > .el-container {
 .grid-content {
   border-radius: 4px;
   min-height: 36px;
+  background: #ccce62;
 }
 .row-bg {
-  padding: 10px 0;
-  background-color: #f9fafc;
+  background-color: #ccce62;
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
   min-height: 400px;
+}
+.el-avatar {
+  vertical-align:middle;
+  margin-right:10px ;
+}
+
+.quit{
+  cursor: pointer;
+  color: blueviolet;
+  margin-left:5px;
 }
 </style>
